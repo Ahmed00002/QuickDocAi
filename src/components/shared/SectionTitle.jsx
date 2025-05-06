@@ -5,7 +5,7 @@ const SectionTitle = ({ title, subtitle }) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center  mb-10">
-        <h1 data-aos="fade-up" className=" font-bold text-4xl">
+        <h1 data-aos="fade-up" className=" font-bold text-4xl lg:text-5xl">
           {title}
         </h1>
         <p

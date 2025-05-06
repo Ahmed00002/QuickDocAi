@@ -48,7 +48,9 @@ const KeyFeatures = () => {
               <span className="mb-4 text-3xl absolute left-0 -top-3 -translate-x-1/2 -translate-y-1/2">
                 {feature.icon}
               </span>
-              <h2 className="font-semibold mb-2">{feature.title}</h2>
+              <h2 className="font-semibold mb-2 text-lg md:text-xl 2xl:text-2xl">
+                {feature.title}
+              </h2>
               <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}

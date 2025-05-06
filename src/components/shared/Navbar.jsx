@@ -3,8 +3,8 @@ import { NavLink } from "react-router";
 
 const Navbar = () => {
   return (
-    <nav className="  p-4">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center">
+    <nav className="p-4">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-center center">
         {/* Logo */}
         <div className="flex items-center">
           {/* <h1 className="text-3xl font-bold font-Oxanium bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text">

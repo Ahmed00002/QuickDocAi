@@ -4,7 +4,11 @@ import styled from "styled-components";
 const Button = () => {
   return (
     <StyledWrapper>
-      <button type="button" className="button px-4 py-3 lg:px-8 lg:py-4">
+      <button
+        data-aos="fade-up"
+        type="button"
+        className="button px-4 py-3 lg:px-8 lg:py-4"
+      >
         <span className="fold" />
         <div className="points_wrapper">
           <i className="point" />

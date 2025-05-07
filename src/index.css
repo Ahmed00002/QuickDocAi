@@ -48,6 +48,7 @@
   --font-Oxanium: "Oxanium", sans-serif;
   --font-Sora: "Sora", sans-serif;
   --font-Inter: "Inter", sans-serif;
+  --m-default: 50px;
 }
 
 :root {
@@ -164,6 +165,9 @@
   }
 
   .center {
-    @apply flex items-center justify-center max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12;
+    @apply flex flex-col items-center justify-center max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12;
+  }
+  .marginTop {
+    @apply mt-28;
   }
 }

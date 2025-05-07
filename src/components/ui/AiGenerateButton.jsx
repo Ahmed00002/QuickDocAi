@@ -7,7 +7,7 @@ const Button = () => {
       <button
         data-aos="fade-up"
         type="button"
-        className="button px-4 py-3 lg:px-8 lg:py-4"
+        className="button px-4 py-3 lg:px-8 lg:py-4 mt-4"
       >
         <span className="fold" />
         <div className="points_wrapper">

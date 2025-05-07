@@ -4,10 +4,11 @@ import React from "react";
 const SectionTitle = ({ title, subtitle }) => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center  mb-10">
+      <div className="flex flex-col items-center justify-center ">
         <h1 data-aos="fade-up" className=" font-bold text-4xl lg:text-5xl">
           {title}
         </h1>
+
         <p
           data-aos="fade-up"
           className="text-gray-500 text-md font-Sora text-center mt-4 max-w-2xl"

@@ -28,7 +28,7 @@ const KeyFeatures = () => {
 
   return (
     <div>
-      <div className="z-0 w-full relative flex flex-col items-center justify-center gap-4 p-10 mb-20 center">
+      <div className="z-0 w-full relative flex flex-col items-center justify-center gap-4 p-10 mb-20 center marginTop">
         {/* section title */}
         <SectionTitle
           title={"Key Features"}
@@ -39,9 +39,10 @@ const KeyFeatures = () => {
 
         {/* features list */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-          {quickDocFeatures.map((feature) => (
+          {quickDocFeatures.map((feature, index) => (
             <div
               data-aos="fade-up"
+              data-aos-delay={index * 100}
               key={feature.id}
               className="bg-white border-l-[1.5px] p-6 flex flex-col items-start justify-start relative"
             >

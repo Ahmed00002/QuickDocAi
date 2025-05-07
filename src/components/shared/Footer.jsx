@@ -8,14 +8,14 @@ const Footer = () => {
     <footer className=" marginTop bg-gray-50">
       <div className="center py-10">
         {/* upper part */}
-        <div className=" grid grid-cols-12 w-full relative">
+        <div className=" grid grid-cols-1 gap-6 md:gap-0 md:grid-cols-12 w-full relative">
           <div className="col-span-6">
             <p className="uppercase text-base">no credit card Required</p>
             <p className="capitalize text-4xl font-bold my-6">
               Start using QuickDoc Ai today
             </p>
             <form>
-              <div className="flex w-8/12 border-b px-4 py-2">
+              <div className="flex w-full md:w-8/12 border-b px-4 py-2">
                 <input
                   className="w-full border-0 ring-0 outline-0 px-2"
                   type="email"
@@ -36,8 +36,8 @@ const Footer = () => {
         </div>
 
         {/* logo and links part */}
-        <div className="grid grid-cols-12 w-full mt-10">
-          <div className="col-span-6 flex flex-col items-start justify-end">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 w-full mt-10">
+          <div className="md:col-span-6 flex flex-col items-start justify-end">
             <h1 className="text-3xl font-bold font-Oxanium">
               QuickDoc{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5A0] to-[#00D9F5]">
@@ -46,7 +46,7 @@ const Footer = () => {
             </h1>
             <p className="mt-2">Gemini Powered AI document analyzer</p>
           </div>
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <h1 className="text-lg font-semibold">Product</h1>
             <ul className="flex flex-col gap-2 mt-4">
               <li>Features</li>
@@ -55,7 +55,7 @@ const Footer = () => {
               <li>Changelog</li>
             </ul>
           </div>
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <h1 className="text-lg font-semibold">Company</h1>
             <ul className="flex flex-col gap-2 mt-4">
               <li>About</li>
@@ -63,7 +63,7 @@ const Footer = () => {
               <li>Privacy Policy</li>
             </ul>
           </div>
-          <div className="col-span-2 ">
+          <div className="md:col-span-2 ">
             <h1 className="text-lg font-semibold">Support</h1>
             <p className="mt-4 mb-2">ahmednuman.top@gmail.com</p>
             <div className="flex gap-2 text-2xl">

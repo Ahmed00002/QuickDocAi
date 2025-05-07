@@ -7,6 +7,8 @@ import AuthenticationLayout from "../layouts/AuthenticationLayout";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
+import ChatPage from "@/pages/chat/ChatPage";
+import ChatLayout from "@/layouts/ChatLayout";
 
 const AllRoutes = () => {
   return (
@@ -18,6 +20,12 @@ const AllRoutes = () => {
           <Route path="/About" element={<p>About</p>} />
           {/* Add more routes here as needed */}
         </Route>
+
+        {/* chat layout */}
+        <Route element={<ChatLayout />}>
+          <Route path="/chat" element={<ChatPage />} />
+        </Route>
+
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
         {/* Authentication Layouts and pages */}

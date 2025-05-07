@@ -1,0 +1,32 @@
+import React from "react";
+import bot from "@/assets/heroRobot.png";
+
+const ChatBuble = () => {
+  return (
+    <>
+      <div class="flex items-start gap-2.5 mb-4">
+        <img class="w-8 h-8 rounded-full" src={bot} alt="Jese image" />
+        <div class="flex flex-col w-full max-w-auto leading-1.5  bg-gray-200 p-2 rounded-lg">
+          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+              QuickDoc AI
+            </span>
+            {/* <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+              11:46
+            </span> */}
+          </div>
+          <p class="text-sm font-normal py-2 text-gray-900 dark:text-white">
+            {" "}
+            That's awesome. I think our users will really appreciate the
+            improvements.
+          </p>
+          {/* <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            Delivered
+          </span> */}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ChatBuble;

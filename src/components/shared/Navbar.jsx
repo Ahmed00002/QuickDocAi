@@ -1,7 +1,33 @@
-import React from "react";
+import Signup from "@/pages/Auth/Signup";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  useAuth,
+  UserButton,
+  // useUser,
+} from "@clerk/clerk-react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router";
 
 const Navbar = () => {
+  // const { user } = useUser();
+  const { getToken, isSignedIn } = useAuth();
+  const token = localStorage.getItem("accessToken");
+  useEffect(() => {
+    const tok = async () => {
+      if (isSignedIn && !token) {
+        const token = await getToken({ template: "generateToken" });
+        console.log(token);
+        localStorage.setItem("accessToken", token);
+      }
+      if (!isSignedIn && token) {
+        localStorage.removeItem("accessToken");
+      }
+    };
+    tok();
+  });
+
   return (
     <nav className="p-4 sticky backdrop-blur-xl bg-transparent top-0 z-50">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-center center">
@@ -50,16 +76,21 @@ const Navbar = () => {
         </div>
         {/* Login and Signup Buttons */}
         <div className="flex justify-end space-x-4">
-          <button className="defaultGradient px-6 py-2 cursor-pointer rounded-full relative ">
-            <span className="absolute top-0 left-0 inset-0 defaultGradient rounded-full z-0"></span>
-            <span className="absolute top-0 left-0 inset-0 flex justify-center items-center bg-white rounded-full z-0 m-[2px]">
+          <SignedOut>
+            <div className="defaultGradient px-6 py-2 cursor-pointer rounded-full relative ">
+              <span className="absolute top-0 left-0 inset-0 defaultGradient rounded-full z-0"></span>
+              <span className="absolute top-0 left-0 inset-0 flex justify-center items-center bg-white rounded-full z-0 m-[2px]">
+                <SignInButton />
+              </span>
               Login
-            </span>
-            Login
-          </button>
-          <button className="defaultGradient px-6 py-2 cursor-pointer rounded-full text-white font-bold">
-            Sign Up
-          </button>
+            </div>
+          </SignedOut>
+          {/* <button className="defaultGradient px-6 py-2 cursor-pointer rounded-full text-white font-bold">
+            <Signup />
+          </button> */}
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
     </nav>

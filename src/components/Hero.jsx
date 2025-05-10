@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./ui/AiGenerateButton";
+import { Link } from "react-router";
 
 const Hero = () => {
   return (
@@ -33,7 +34,9 @@ const Hero = () => {
           Chat with Your Documents. Instantly. Turn any PDF into a smart
           assistant using Gemini
         </p>
-        <Button />
+        <Link to={"/chat"}>
+          <Button />
+        </Link>
       </div>
     </div>
   );

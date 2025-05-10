@@ -9,6 +9,11 @@ import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
 import ChatPage from "@/pages/chat/ChatPage";
 import ChatLayout from "@/layouts/ChatLayout";
+import Private from "./private/Private";
+import {
+  AuthenticateWithRedirectCallback,
+  RedirectToSignUp,
+} from "@clerk/clerk-react";
 
 const AllRoutes = () => {
   return (
@@ -23,16 +28,37 @@ const AllRoutes = () => {
 
         {/* chat layout */}
         <Route element={<ChatLayout />}>
-          <Route path="/chat" element={<ChatPage />} />
+          <Route
+            path="/chat"
+            element={
+              <Private>
+                <ChatPage />
+              </Private>
+            }
+          />
         </Route>
 
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
         {/* Authentication Layouts and pages */}
         <Route element={<AuthenticationLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/login/factor-one" element={<Login />} />
+          <Route path="/auth/register" element={<Signup />} />
+          <Route
+            path="/auth/register/verify-email-address"
+            element={<Signup />}
+          />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/auth/register/sso-callback"
+            element={
+              <>
+                <div className="text-center p-10">Redirecting...</div>{" "}
+                <AuthenticateWithRedirectCallback />
+              </>
+            }
+          />
         </Route>
       </Routes>
     </>

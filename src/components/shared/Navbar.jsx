@@ -8,7 +8,7 @@ import {
   // useUser,
 } from "@clerk/clerk-react";
 import React, { useEffect } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   // const { user } = useUser();
@@ -76,21 +76,29 @@ const Navbar = () => {
         </div>
         {/* Login and Signup Buttons */}
         <div className="flex justify-end space-x-4">
-          <SignedOut>
-            <div className="defaultGradient px-6 py-2 cursor-pointer rounded-full relative ">
-              <span className="absolute top-0 left-0 inset-0 defaultGradient rounded-full z-0"></span>
-              <span className="absolute top-0 left-0 inset-0 flex justify-center items-center bg-white rounded-full z-0 m-[2px]">
-                <SignInButton />
-              </span>
-              Login
-            </div>
-          </SignedOut>
-          {/* <button className="defaultGradient px-6 py-2 cursor-pointer rounded-full text-white font-bold">
-            <Signup />
-          </button> */}
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          {!isSignedIn ? (
+            <>
+              {" "}
+              <Link to={"/auth/login"}>
+                <button className="defaultGradient cursor-pointer rounded-full relative px-6 py-2 ">
+                  <span className="absolute top-0 left-0 inset-0 defaultGradient rounded-full z-0"></span>
+                  <span className="absolute top-0  left-0 inset-0 flex justify-center items-center bg-white rounded-full z-0 m-[2px]">
+                    Login
+                  </span>
+                  Login
+                </button>
+              </Link>
+              <Link to={"/auth/register"}>
+                <button className="defaultGradient px-6 py-2 cursor-pointer rounded-full text-white font-bold">
+                  Signup
+                </button>
+              </Link>
+            </>
+          ) : (
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          )}
         </div>
       </div>
     </nav>

@@ -1,17 +1,6 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 
-const Upload = () => {
-  const [file, setFile] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-
-  const onFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  };
+const Upload = ({ handleUpload }) => {
   return (
     <StyledWrapper>
       <label className="custum-file-upload" htmlFor="file">
@@ -37,7 +26,12 @@ const Upload = () => {
         <div className="text">
           <span>Click to upload your document</span>
         </div>
-        <input type="file" id="file" />
+        <input
+          onChange={handleUpload}
+          type="file"
+          id="file"
+          accept="application/pdf"
+        />
       </label>
     </StyledWrapper>
   );

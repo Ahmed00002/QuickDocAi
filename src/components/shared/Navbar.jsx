@@ -9,6 +9,7 @@ import {
 } from "@clerk/clerk-react";
 import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router";
+import AiButton from "../ui/AIButton";
 
 const Navbar = () => {
   // const { user } = useUser();
@@ -30,9 +31,9 @@ const Navbar = () => {
 
   return (
     <nav className="p-4 sticky backdrop-blur-xl bg-transparent top-0 z-50">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-center center">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 items-center justify-center center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center col-span-4">
           {/* <h1 className="text-3xl font-bold font-Oxanium bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text">
             QuickDoc AI
           </h1> */}
@@ -45,7 +46,7 @@ const Navbar = () => {
           </h1>
         </div>
         {/* Navigation Menus */}
-        <div className="flex justify-center text-gray-600 navs">
+        <div className="flex justify-center text-gray-600 navs col-span-4">
           {["Home", "About", "Services", "Contact"].map((link) =>
             link !== "Home" ? (
               <NavLink
@@ -75,7 +76,7 @@ const Navbar = () => {
           )}
         </div>
         {/* Login and Signup Buttons */}
-        <div className="flex justify-end space-x-4">
+        <div className="flex justify-end space-x-4 col-span-4">
           {!isSignedIn ? (
             <>
               {" "}
@@ -95,9 +96,17 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <>
+              {/* ai button */}
+              {isSignedIn && (
+                <NavLink to="/chat">
+                  <AiButton />
+                </NavLink>
+              )}
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </>
           )}
         </div>
       </div>

@@ -5,6 +5,7 @@ import {
   SignInButton,
   useAuth,
   UserButton,
+  useUser,
   // useUser,
 } from "@clerk/clerk-react";
 import React, { useEffect } from "react";
@@ -12,22 +13,22 @@ import { Link, NavLink } from "react-router";
 import AiButton from "../ui/AIButton";
 
 const Navbar = () => {
-  // const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const { getToken, isSignedIn } = useAuth();
   const token = localStorage.getItem("accessToken");
   useEffect(() => {
     const tok = async () => {
-      if (isSignedIn && !token) {
+      if (isLoaded && isSignedIn && !token) {
         const token = await getToken({ template: "generateToken" });
         console.log(token);
         localStorage.setItem("accessToken", token);
       }
-      if (!isSignedIn && token) {
+      if (isLoaded && !isSignedIn && token) {
         localStorage.removeItem("accessToken");
       }
     };
     tok();
-  });
+  }, [isSignedIn, getToken, user, isLoaded, token]);
 
   return (
     <nav className="p-4 sticky backdrop-blur-xl bg-transparent top-0 z-50">

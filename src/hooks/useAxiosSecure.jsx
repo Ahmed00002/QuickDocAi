@@ -1,14 +1,14 @@
 import { useAuth } from "@clerk/clerk-react";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-const AxiosSecure = () => {
+const useAxiosSecure = () => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: import.meta.env.REACT_APP_API_URL, // Replace with your API base URL
+    baseURL: "http://localhost:3000", // Replace with your API base URL
   });
 
   useEffect(() => {
@@ -37,9 +37,9 @@ const AxiosSecure = () => {
         return Promise.reject(error);
       }
     );
-  }, [logout, navigate, axiosSecure]);
+  }, [signOut, navigate, axiosSecure]);
 
   return axiosSecure;
 };
 
-export default AxiosSecure;
+export default useAxiosSecure;

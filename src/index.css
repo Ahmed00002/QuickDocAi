@@ -170,4 +170,13 @@
   .marginTop {
     @apply mt-28;
   }
+
+  .chat-container {
+    overflow: auto; /* scroll চালু থাকবে */
+    scrollbar-width: none; /* Firefox এর জন্য */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .chat-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari scrollbar hide */
+  }
 }

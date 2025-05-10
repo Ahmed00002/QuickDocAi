@@ -1,14 +1,25 @@
 import Upload from "@/components/ui/Upload";
 import { MoveLeft, MoveRight, SendHorizonal } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatBuble from "./ChatBuble";
 import { Document, Page } from "react-pdf";
 import { FaFileUpload } from "react-icons/fa";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const ChatPage = () => {
   const [file, setFile] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const axiosSecure = useAxiosSecure();
+  // chats of user and ai
+  const [chatMessages, setChatMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
   const nextPage = () => {
     if (pageNumber < numPages) {
@@ -28,13 +39,74 @@ const ChatPage = () => {
 
   const handleFileUpload = (e) => {
     e.preventDefault();
+    setLoading(true);
     const file = e.target.files[0];
     setFile(file);
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      // Perform the upload logic here, e.g., using Axios or Fetch API
-      console.log("File uploaded:", file.name);
+      // this request will perform instantly when a user upload a file.
+      axiosSecure.post("/analyze-pdf", formData).then((res) => {
+        setLoading(false);
+
+        // console.log(res.data.candidates[0].content.parts[0].text);
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            type: "ai",
+            message: res.data.candidates[0].content.parts[0].text,
+          },
+        ]);
+        console.log(chatMessages);
+
+        // console.log("recivied", res.data.candidates[0].content.parts[0].text);
+      });
+    }
+  };
+
+  const handleInput = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const prompt = data.get("prompt");
+    const form = e.target;
+
+    setLoading(true);
+    setChatMessages((prev) => [
+      ...prev,
+      {
+        type: "user",
+        message: prompt,
+      },
+    ]);
+    data.append("file", file);
+    form.reset();
+    // checking condition if user uploaded pdf file.
+    if (file) {
+      axiosSecure.post(`/analyze-pdf?prompt=${prompt}`, data).then((res) => {
+        setChatMessages;
+        setLoading(false);
+
+        // console.log(res.data.candidates[0].content.parts[0].text);
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            type: "ai",
+            message: res.data.candidates[0].content.parts[0].text,
+          },
+        ]);
+        console.log(chatMessages);
+      });
+    } else {
+      axiosSecure.get(`/chat?prompt=${prompt}`).then((res) => {
+        setLoading(false);
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            type: "ai",
+            message: res.data,
+          },
+        ]);
+      });
     }
   };
   return (
@@ -93,12 +165,20 @@ const ChatPage = () => {
         </aside>
 
         {/* Fixed chat input at   the bottom */}
-        <aside className="col-span-8 h-full bg-gray-100 p-2 flex flex-col justify-end">
+        <aside className="col-span-8 h-full bg-gray-100 p-2 flex flex-col justify-end overflow-scroll overflow-y-clip scroll-m-1 chat-container ">
           <h2 className="text-xl font-semibold mb-4">Chat with AI</h2>
           {/* Chat messages */}
-          <div className="flex-grow overflow-y-auto mb-4">
+          <div className="flex-grow overflow-y-scroll chat-container overflow-clip scroll-m-1 mb-4">
             {/* Chat messages will be displayed here */}
-            <ChatBuble />
+
+            {chatMessages.map((msg, idx) => (
+              <ChatBuble key={idx} aiMsg={msg} isAi={msg.type} />
+            ))}
+            {loading && (
+              <ChatBuble aiMsg={{ message: "Analyzing..." }} isAi={"ai"} />
+            )}
+            {/* Scroll target */}
+            <div ref={bottomRef} />
           </div>
 
           <div className="w-full p-2 bg-white rounded-lg border-t flex gap-4 justify-between items-center ">
@@ -115,10 +195,11 @@ const ChatPage = () => {
                 className="hidden"
               />
             </label>
-            <form className="w-full flex gap-4">
+            <form onSubmit={handleInput} className="w-full flex gap-4">
               <input
                 className="w-full h-12  outline-0 ring-0 border-0 border-gray-300 rounded-md focus:outline-none "
                 type="text"
+                name="prompt"
                 placeholder="Ask me anything related to your document..."
               />
               <button type="submit">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import bot from "@/assets/heroRobot.png";
+import { Typewriter } from "react-simple-typewriter";
 
 const ChatBuble = ({ aiMsg, isAi }) => {
   const { message } = aiMsg;
@@ -59,6 +60,11 @@ const ChatBuble = ({ aiMsg, isAi }) => {
                 isAi === "user" && "text-right"
               }`}
             >
+              {/* {isAi === "ai" ? (
+                <Typewriter words={message.split()} loop={1} typeSpeed={5} />
+              ) : (
+                message
+              )} */}
               {message}
             </p>
           </div>

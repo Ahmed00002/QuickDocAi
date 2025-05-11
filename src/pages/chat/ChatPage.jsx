@@ -175,7 +175,7 @@ const ChatPage = () => {
               <ChatBuble key={idx} aiMsg={msg} isAi={msg.type} />
             ))}
             {loading && (
-              <ChatBuble aiMsg={{ message: "Analyzing..." }} isAi={"ai"} />
+              <ChatBuble aiMsg={{ message: "Typing..." }} isAi={"ai"} />
             )}
             {/* Scroll target */}
             <div ref={bottomRef} />

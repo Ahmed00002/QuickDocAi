@@ -37,7 +37,7 @@ const Footer = () => {
 
         {/* logo and links part */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 w-full mt-10">
-          <div className="md:col-span-6 flex flex-col items-start justify-end">
+          <div className="md:col-span-4 lg:col-span-6 flex flex-col items-start justify-end">
             <h1 className="text-3xl font-bold font-Oxanium">
               QuickDoc{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5A0] to-[#00D9F5]">
@@ -63,7 +63,7 @@ const Footer = () => {
               <li>Privacy Policy</li>
             </ul>
           </div>
-          <div className="md:col-span-2 ">
+          <div className="md:col-span-4 lg:col-span-2 flex flex-col flex-wrap ">
             <h1 className="text-lg font-semibold">Support</h1>
             <p className="mt-4 mb-2">ahmednuman.top@gmail.com</p>
             <div className="flex gap-2 text-2xl">

@@ -14,6 +14,7 @@ import {
   AuthenticateWithRedirectCallback,
   RedirectToSignUp,
 } from "@clerk/clerk-react";
+import About from "@/pages/About";
 
 const AllRoutes = () => {
   return (
@@ -22,7 +23,7 @@ const AllRoutes = () => {
         {/* Main Layouts and pages */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/About" element={<p>About</p>} />
+          <Route path="/About" element={<About />} />
           {/* Add more routes here as needed */}
         </Route>
 

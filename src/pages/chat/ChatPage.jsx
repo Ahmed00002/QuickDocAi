@@ -54,7 +54,7 @@ const ChatPage = () => {
           ...prev,
           {
             type: "ai",
-            message: res.data.candidates[0].content.parts[0].text,
+            message: res.data,
           },
         ]);
         console.log(chatMessages);
@@ -91,7 +91,7 @@ const ChatPage = () => {
           ...prev,
           {
             type: "ai",
-            message: res.data.candidates[0].content.parts[0].text,
+            message: res.data,
           },
         ]);
         console.log(chatMessages);
@@ -166,7 +166,7 @@ const ChatPage = () => {
 
         {/* Fixed chat input at   the bottom */}
         <aside className="col-span-8 h-full bg-gray-100 p-2 flex flex-col justify-end overflow-scroll overflow-y-clip scroll-m-1 chat-container ">
-          <h2 className="text-xl font-semibold mb-4">Chat with AI</h2>
+          {/* <h2 className="text-xl font-semibold mb-4">Conversations</h2> */}
           {/* Chat messages */}
           <div className="flex-grow overflow-y-scroll chat-container overflow-clip scroll-m-1 mb-4">
             {/* Chat messages will be displayed here */}

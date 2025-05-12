@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import bot from "@/assets/heroRobot.png";
 import { Typewriter } from "react-simple-typewriter";
+import ReactMarkdown from "react-markdown";
+import Markdown from "react-markdown";
+import { useUser } from "@clerk/clerk-react";
 
 const ChatBuble = ({ aiMsg, isAi }) => {
   const { message } = aiMsg;
   const [displayedText, setDisplayedText] = useState("");
+  const { user } = useUser();
 
   useEffect(() => {
     let index = 0;
@@ -36,7 +40,7 @@ const ChatBuble = ({ aiMsg, isAi }) => {
         className={`w-8 h-8 rounded-full ${
           isAi === "ai" ? "order-1" : "order-2"
         }`}
-        src={bot}
+        src={isAi === "ai" ? bot : user.imageUrl}
         alt="Profile"
       />
       <div
@@ -60,12 +64,7 @@ const ChatBuble = ({ aiMsg, isAi }) => {
                 isAi === "user" && "text-right"
               }`}
             >
-              {/* {isAi === "ai" ? (
-                <Typewriter words={message.split()} loop={1} typeSpeed={5} />
-              ) : (
-                message
-              )} */}
-              {message}
+              <Markdown>{message}</Markdown>
             </p>
           </div>
         </div>

@@ -5,6 +5,8 @@ import ChatBuble from "./ChatBuble";
 import { Document, Page } from "react-pdf";
 import { FaFileUpload } from "react-icons/fa";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { MdCancel } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const ChatPage = () => {
   const [file, setFile] = useState(null);
@@ -33,33 +35,45 @@ const ChatPage = () => {
     }
   };
 
+  // delete uploaded fule
+  const cancelFile = () => {
+    setFile(null);
+  };
+
   const onDocumentLoadSuccess = ({ numPages }) => {
+    toast.success("File loaded successfully");
     setNumPages(numPages);
   };
 
+  // ask ai with with file
   const handleFileUpload = (e) => {
     e.preventDefault();
     setLoading(true);
     const file = e.target.files[0];
     setFile(file);
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      // this request will perform instantly when a user upload a file.
-      axiosSecure.post("/analyze-pdf", formData).then((res) => {
-        setLoading(false);
+    try {
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        // this request will perform instantly when a user upload a file.
+        axiosSecure.post("/analyze-pdf", formData).then((res) => {
+          setLoading(false);
 
-        setChatMessages((prev) => [
-          ...prev,
-          {
-            type: "ai",
-            message: res.data,
-          },
-        ]);
-      });
+          setChatMessages((prev) => [
+            ...prev,
+            {
+              type: "ai",
+              message: res.data,
+            },
+          ]);
+        });
+      }
+    } catch {
+      toast.error("Failed to ask QuickDock Ai");
     }
   };
 
+  // ask ai without file
   const handleInput = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -77,30 +91,34 @@ const ChatPage = () => {
     data.append("file", file);
     form.reset();
     // checking condition if user uploaded pdf file.
-    if (file) {
-      axiosSecure.post(`/analyze-pdf?prompt=${prompt}`, data).then((res) => {
-        setChatMessages;
-        setLoading(false);
+    try {
+      if (file) {
+        axiosSecure.post(`/analyze-pdf?prompt=${prompt}`, data).then((res) => {
+          setChatMessages;
+          setLoading(false);
 
-        setChatMessages((prev) => [
-          ...prev,
-          {
-            type: "ai",
-            message: res.data,
-          },
-        ]);
-      });
-    } else {
-      axiosSecure.get(`/chat?prompt=${prompt}`).then((res) => {
-        setLoading(false);
-        setChatMessages((prev) => [
-          ...prev,
-          {
-            type: "ai",
-            message: res.data,
-          },
-        ]);
-      });
+          setChatMessages((prev) => [
+            ...prev,
+            {
+              type: "ai",
+              message: res.data,
+            },
+          ]);
+        });
+      } else {
+        axiosSecure.get(`/chat?prompt=${prompt}`).then((res) => {
+          setLoading(false);
+          setChatMessages((prev) => [
+            ...prev,
+            {
+              type: "ai",
+              message: res.data,
+            },
+          ]);
+        });
+      }
+    } catch {
+      toast.error("Failed to ask QuickDock Ai");
     }
   };
   return (
@@ -109,7 +127,6 @@ const ChatPage = () => {
       <section className="h-full grid grid-cols-1 md:grid-cols-12 ">
         {/* Left side: Document preview */}
         <aside className="col-span-4 hidden md:flex md:flex-col bg-gray-100 p-2 overflow-hidden ">
-          {/* <h2 className="text-xl font-semibold mb-4">Document Preview</h2> */}
           {/* Document preview content */}
           <div className="bg-white  rounded-lg shadow-md flex-grow flex flex-col items-center justify-center ">
             {!file ? (
@@ -122,6 +139,9 @@ const ChatPage = () => {
                   <Document
                     file={file}
                     onLoadSuccess={onDocumentLoadSuccess}
+                    onLoadError={() => {
+                      toast.error("failed to load pdf");
+                    }}
                     renderMode="canvas"
                     className="custom-class-name-1"
                   >
@@ -160,7 +180,6 @@ const ChatPage = () => {
 
         {/* Fixed chat input at   the bottom */}
         <aside className="md:col-span-8 md:h-full bg-gray-100 p-2 flex flex-col justify-end overflow-scroll overflow-y-clip  chat-container ">
-          {/* <h2 className="text-xl font-semibold mb-4">Conversations</h2> */}
           {/* Chat messages */}
           <div className="flex-grow overflow-y-scroll chat-container overflow-clip scroll-m-1 mb-4">
             {/* Chat messages will be displayed here */}
@@ -175,7 +194,19 @@ const ChatPage = () => {
             <div ref={bottomRef} />
           </div>
 
-          <div className="w-full p-2 bg-white rounded-lg border-t flex gap-4 justify-between items-center ">
+          <div className="w-full p-2 bg-white rounded-lg border-t flex gap-4 justify-between items-center relative ">
+            {/* file view for mobile */}
+            {file && (
+              <>
+                <div className="absolute left-0 bottom-full bg-white max-w-7/12 -translate-y-1 px-2 py-[5px] rounded-lg flax md:hidden">
+                  <div className="flex gap-2 text-ellipsis items-center">
+                    <p className="flex-grow text-xs">{file?.name}</p>{" "}
+                    <MdCancel onClick={cancelFile} className="cursor-pointer" />
+                  </div>
+                </div>
+              </>
+            )}
+
             <label
               htmlFor="file-upload"
               className="flex flex-col items-center justify-center  border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition p-[2px] h-auto"

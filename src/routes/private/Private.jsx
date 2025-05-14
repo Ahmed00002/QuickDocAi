@@ -1,5 +1,5 @@
 import Loader from "@/components/ui/Loader";
-import { useAuth, useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import React from "react";
 import { Navigate } from "react-router";
 

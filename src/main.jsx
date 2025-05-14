@@ -9,6 +9,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 // import { HelmetProvider } from "react-helmet-async";
 
 import { pdfjs } from "react-pdf";
+import { Bounce, ToastContainer } from "react-toastify";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -32,6 +33,19 @@ createRoot(document.getElementById("root")).render(
       signUpForceRedirectUrl="/auth/register"
     >
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
         <AllRoutes />
       </BrowserRouter>
       {/* </HelmetProvider> */}

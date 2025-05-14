@@ -1,8 +1,5 @@
-import Signup from "@/pages/Auth/Signup";
 import {
   SignedIn,
-  SignedOut,
-  SignInButton,
   useAuth,
   UserButton,
   useUser,
@@ -12,7 +9,6 @@ import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import AiButton from "../ui/AIButton";
 import MobileSidebar from "../MobileSidebar";
-import Loader from "../ui/Loader";
 
 const Navbar = () => {
   const { user, isLoaded } = useUser();

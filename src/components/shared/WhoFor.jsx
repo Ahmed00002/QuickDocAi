@@ -141,7 +141,7 @@ const Developer = () => {
                 <FaLinkedin />
               </a>
               <a
-                href="https://yourportfolio.com"
+                href="https://ahmednuman.netlify.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"

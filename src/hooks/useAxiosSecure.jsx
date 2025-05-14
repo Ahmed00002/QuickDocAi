@@ -8,7 +8,7 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://quick-doc-server.vercel.app/api",
   });
 
   useEffect(() => {

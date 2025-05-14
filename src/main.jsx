@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";
-import AllRoutes from "./routes/Routes.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -10,6 +9,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 
 import { pdfjs } from "react-pdf";
 import { Bounce, ToastContainer } from "react-toastify";
+import AllRoutes from "./routes/routes";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",

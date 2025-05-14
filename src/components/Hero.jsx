@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const Hero = () => {
   return (
     <div
-      className="py-20 lg:h-screen w-full text-4xl relative flex flex-col items-center justify-center gap-4 p-10
+      className="py-20 lg:h-screen w-full text-4xl overflow-hidden md:overflow-visible relative flex flex-col items-center justify-center gap-4 center
 "
     >
       {/* gradient style */}
@@ -17,7 +17,7 @@ const Hero = () => {
       >
         Gemini Powered
       </button>
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2 w-full">
         <h1
           data-aos="fade-up"
           className="text-5xl md:text-6xl lg:text-8xl font-bold font-Oxanium"
@@ -29,7 +29,7 @@ const Hero = () => {
         </h1>
         <p
           data-aos="fade-up"
-          className="text-base mb-4 md:mb-0 md:text-lg font-Sora text-center mt-4 max-w-2xl"
+          className="text-base mb-4 md:mb-0 md:text-lg font-Sora text-center mt-4 w-full md:max-w-2xl"
         >
           Chat with Your Documents. Instantly. Turn any PDF into a smart
           assistant using Gemini

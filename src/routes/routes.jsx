@@ -15,6 +15,8 @@ import {
   RedirectToSignUp,
 } from "@clerk/clerk-react";
 import About from "@/pages/About";
+import Loader from "@/components/ui/Loader";
+import PrivacyPolicy from "@/pages/policy/PrivacyPolicy";
 
 const AllRoutes = () => {
   return (
@@ -22,15 +24,15 @@ const AllRoutes = () => {
       <Routes>
         {/* Main Layouts and pages */}
         <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/About" element={<About />} />
-          {/* Add more routes here as needed */}
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Route>
 
         {/* chat layout */}
-        <Route element={<ChatLayout />}>
+        <Route path="/chat" element={<ChatLayout />}>
           <Route
-            path="/chat"
+            index
             element={
               <Private>
                 <ChatPage />
@@ -55,7 +57,7 @@ const AllRoutes = () => {
             path="/auth/register/sso-callback"
             element={
               <>
-                <div className="text-center p-10">Redirecting...</div>{" "}
+                <Loader />
                 <AuthenticateWithRedirectCallback />
               </>
             }

@@ -127,6 +127,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply scroll-smooth;
+  }
   .defaultGradient {
     @apply bg-gradient-to-r from-[#00F5A0] to-[#00D9F5];
   }
@@ -165,7 +168,7 @@
   }
 
   .center {
-    @apply flex flex-col items-center justify-center max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12;
+    @apply max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12;
   }
   .marginTop {
     @apply mt-28;
@@ -178,5 +181,51 @@
   }
   .chat-container::-webkit-scrollbar {
     display: none; /* Chrome/Safari scrollbar hide */
+  }
+
+  /* sidebar styles */
+  .sideOptions > a {
+    @apply px-4 py-2 flex items-center gap-2;
+  }
+  .sideOptions > a.active {
+    @apply bg-primary-dark/10 text-primary-dark;
+  }
+
+  /* HTML: <div class="loader"></div> */
+  .loader {
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+    color: #00d9f5;
+    background: radial-gradient(
+      farthest-side,
+      currentColor calc(100% - 6px),
+      #0000 calc(100% - 5px) 0
+    );
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      #0000 calc(100% - 13px),
+      #000 calc(100% - 12px)
+    );
+    border-radius: 50%;
+    animation: l19 2s infinite linear;
+  }
+  .loader::before,
+  .loader::after {
+    content: "";
+    grid-area: 1/1;
+    background: linear-gradient(currentColor 0 0) center,
+      linear-gradient(currentColor 0 0) center;
+    background-size: 100% 10px, 10px 100%;
+    background-repeat: no-repeat;
+  }
+  .loader::after {
+    transform: rotate(45deg);
+  }
+
+  @keyframes l19 {
+    100% {
+      transform: rotate(1turn);
+    }
   }
 }

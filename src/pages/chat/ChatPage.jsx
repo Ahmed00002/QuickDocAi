@@ -49,7 +49,6 @@ const ChatPage = () => {
       axiosSecure.post("/analyze-pdf", formData).then((res) => {
         setLoading(false);
 
-        // console.log(res.data.candidates[0].content.parts[0].text);
         setChatMessages((prev) => [
           ...prev,
           {
@@ -57,9 +56,6 @@ const ChatPage = () => {
             message: res.data,
           },
         ]);
-        console.log(chatMessages);
-
-        // console.log("recivied", res.data.candidates[0].content.parts[0].text);
       });
     }
   };
@@ -86,7 +82,6 @@ const ChatPage = () => {
         setChatMessages;
         setLoading(false);
 
-        // console.log(res.data.candidates[0].content.parts[0].text);
         setChatMessages((prev) => [
           ...prev,
           {
@@ -94,7 +89,6 @@ const ChatPage = () => {
             message: res.data,
           },
         ]);
-        console.log(chatMessages);
       });
     } else {
       axiosSecure.get(`/chat?prompt=${prompt}`).then((res) => {
@@ -110,11 +104,11 @@ const ChatPage = () => {
     }
   };
   return (
-    <div className="h-[calc(100vh-80px)] flex flex-col">
+    <div className="h-[calc(100vh-70px)] md:h-[calc(100vh-80px)] flex flex-col">
       {/* Chat content goes here */}
-      <section className="h-full grid grid-cols-12">
+      <section className="h-full grid grid-cols-1 md:grid-cols-12 ">
         {/* Left side: Document preview */}
-        <aside className="col-span-4 flex flex-col  bg-gray-100 p-2  overflow-hidden">
+        <aside className="col-span-4 hidden md:flex md:flex-col bg-gray-100 p-2 overflow-hidden ">
           {/* <h2 className="text-xl font-semibold mb-4">Document Preview</h2> */}
           {/* Document preview content */}
           <div className="bg-white  rounded-lg shadow-md flex-grow flex flex-col items-center justify-center ">
@@ -165,7 +159,7 @@ const ChatPage = () => {
         </aside>
 
         {/* Fixed chat input at   the bottom */}
-        <aside className="col-span-8 h-full bg-gray-100 p-2 flex flex-col justify-end overflow-scroll overflow-y-clip scroll-m-1 chat-container ">
+        <aside className="md:col-span-8 md:h-full bg-gray-100 p-2 flex flex-col justify-end overflow-scroll overflow-y-clip  chat-container ">
           {/* <h2 className="text-xl font-semibold mb-4">Conversations</h2> */}
           {/* Chat messages */}
           <div className="flex-grow overflow-y-scroll chat-container overflow-clip scroll-m-1 mb-4">

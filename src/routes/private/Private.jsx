@@ -1,3 +1,4 @@
+import Loader from "@/components/ui/Loader";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import React from "react";
 import { Navigate } from "react-router";
@@ -10,7 +11,7 @@ const Private = ({ children }) => {
   }
 
   if (!isLoaded) {
-    return <p>Loading please wait...</p>;
+    return <Loader />;
   }
 
   return <Navigate to={"/"}></Navigate>;

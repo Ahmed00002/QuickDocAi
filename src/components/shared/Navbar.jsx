@@ -11,6 +11,8 @@ import {
 import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import AiButton from "../ui/AIButton";
+import MobileSidebar from "../MobileSidebar";
+import Loader from "../ui/Loader";
 
 const Navbar = () => {
   const { user, isLoaded } = useUser();
@@ -20,7 +22,6 @@ const Navbar = () => {
     const tok = async () => {
       if (isLoaded && isSignedIn && !token) {
         const token = await getToken({ template: "generateToken" });
-        console.log(token);
         localStorage.setItem("accessToken", token);
       }
       if (isLoaded && !isSignedIn && token) {
@@ -31,15 +32,18 @@ const Navbar = () => {
   }, [isSignedIn, getToken, user, isLoaded, token]);
 
   return (
-    <nav className="p-4 sticky backdrop-blur-xl bg-transparent top-0 z-50">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 items-center justify-center center">
+    <nav className="py-4 sticky backdrop-blur-xl bg-transparent top-0 z-50">
+      <div className="container mx-auto grid grid-cols-2 md:grid-cols-12 items-center justify-center center ">
         {/* Logo */}
-        <div className="flex items-center col-span-4">
+        <div className="flex gap-4 items-center md:col-span-4">
           {/* <h1 className="text-3xl font-bold font-Oxanium bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text">
             QuickDoc AI
           </h1> */}
 
-          <h1 className="text-3xl font-bold font-Oxanium">
+          {/* sheet for mobile view */}
+          <MobileSidebar />
+
+          <h1 className="text-xl md:text-3xl font-bold font-Oxanium ">
             QuickDoc{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5A0] to-[#00D9F5]">
               AI
@@ -47,37 +51,36 @@ const Navbar = () => {
           </h1>
         </div>
         {/* Navigation Menus */}
-        <div className="flex justify-center text-gray-600 navs col-span-4">
-          {["Home", "About", "Services", "Contact"].map((link) =>
-            link !== "Home" ? (
-              <NavLink
-                key={link}
-                to={`/${link.toLowerCase()}`}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#00D9F5] bg-[#00F5A0]/10 px-4 py-1 rounded-full"
-                    : "text-gray-600 hover:text-[#00F5A0] transition duration-300 px-4 py-1"
-                }
-              >
-                {link}
-              </NavLink>
-            ) : (
-              <NavLink
-                key={link}
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#00D9F5] bg-[#00F5A0]/10 px-4 py-1 rounded-full"
-                    : "text-gray-600 hover:text-[#00F5A0] transition duration-300 px-4 py-1"
-                }
-              >
-                {link}
-              </NavLink>
-            )
-          )}
+        <div className="md:flex justify-center text-gray-600 navs col-span-4 hidden ">
+          <NavLink
+            to={"/"}
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#00D9F5] bg-[#00F5A0]/10 px-4 py-1 rounded-full"
+                : "text-gray-600 hover:text-[#00F5A0] transition duration-300 px-4 py-1"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to={"/about"}
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#00D9F5] bg-[#00F5A0]/10 px-4 py-1 rounded-full"
+                : "text-gray-600 hover:text-[#00F5A0] transition duration-300 px-4 py-1"
+            }
+          >
+            About
+          </NavLink>
+          <a
+            href={"#features"}
+            className="text-gray-600 hover:text-[#00F5A0] transition duration-300 px-4 py-1"
+          >
+            Features
+          </a>
         </div>
         {/* Login and Signup Buttons */}
-        <div className="flex justify-end space-x-4 col-span-4">
+        <div className="flex justify-end space-x-4 md:col-span-4">
           {!isSignedIn ? (
             <>
               {" "}
@@ -100,7 +103,7 @@ const Navbar = () => {
             <>
               {/* ai button */}
               {isSignedIn && (
-                <NavLink to="/chat">
+                <NavLink to={"/chat"}>
                   <AiButton />
                 </NavLink>
               )}

@@ -125,7 +125,7 @@ const Developer = () => {
             {/* Social Links */}
             <div data-aos={"fade-up"} className="flex gap-6 mt-6 text-2xl">
               <a
-                href="https://github.com/your-username"
+                href="https://github.com/Ahmed00002"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"
@@ -133,7 +133,7 @@ const Developer = () => {
                 <FaGithub />
               </a>
               <a
-                href="https://linkedin.com/in/your-name"
+                href="https://www.linkedin.com/in/layekahmednuman"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"

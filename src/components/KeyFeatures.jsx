@@ -28,7 +28,10 @@ const KeyFeatures = () => {
 
   return (
     <div>
-      <div className="z-0 w-full relative flex flex-col items-center justify-center gap-4 p-10 mb-20 center marginTop">
+      <div
+        id="features"
+        className="z-0 w-full relative flex flex-col items-center justify-center gap-4 p-10 mb-20 center marginTop"
+      >
         {/* section title */}
         <SectionTitle
           title={"Key Features"}

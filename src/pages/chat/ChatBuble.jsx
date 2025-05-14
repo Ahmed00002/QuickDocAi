@@ -1,41 +1,14 @@
-import React, { useEffect, useState } from "react";
 import bot from "@/assets/heroRobot.png";
-import { Typewriter } from "react-simple-typewriter";
-import ReactMarkdown from "react-markdown";
 import Markdown from "react-markdown";
 import { useUser } from "@clerk/clerk-react";
 
 const ChatBuble = ({ aiMsg, isAi }) => {
   const { message } = aiMsg;
-  const [displayedText, setDisplayedText] = useState("");
+  // const [displayedText, setDisplayedText] = useState("");
   const { user } = useUser();
 
-  useEffect(() => {
-    let index = 0;
-    setDisplayedText(""); // Reset before typing starts
-
-    if (isAi === "ai") {
-      const interval = setInterval(() => {
-        setDisplayedText((prev) => {
-          if (index < message.length) {
-            const nextChar = message.charAt(index);
-            index++;
-            return prev + nextChar;
-          } else {
-            clearInterval(interval);
-            return prev;
-          }
-        });
-      }, 30);
-
-      return () => clearInterval(interval); // Clean-up
-    } else {
-      setDisplayedText(message); // For user, no typing animation
-    }
-  }, [message, isAi]);
-
   return (
-    <div className="flex items-start gap-2.5 mb-4">
+    <div className="flex items-start gap-2.5 mb-4 ">
       <img
         className={`w-8 h-8 rounded-full ${
           isAi === "ai" ? "order-1" : "order-2"
@@ -44,12 +17,12 @@ const ChatBuble = ({ aiMsg, isAi }) => {
         alt="Profile"
       />
       <div
-        className={`flex flex-col w-full max-w-auto leading-1.5 p-2 rounded-lg ${
+        className={`flex flex-col w-full max-w-auto leading-1.5 p-2 rounded-lg  ${
           isAi === "ai" ? "order-2" : "order-1"
         }`}
       >
         <p
-          className={`text-sm font-semibold text-gray-900 w-full dark:text-white ${
+          className={`text-sm font-semibold text-gray-900 w-full dark:text-white text-ellipsis ${
             isAi === "ai" ? "text-left" : "text-right"
           }`}
         >

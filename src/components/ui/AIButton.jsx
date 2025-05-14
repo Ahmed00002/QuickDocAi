@@ -4,12 +4,22 @@ import styled from "styled-components";
 const AiButton = () => {
   return (
     <StyledWrapper>
-      <button className="button px-4 py-1">
-        Chat With AI
-        <div className="hoverEffect">
-          <div />
-        </div>
-      </button>
+      <div className="hidden md:block">
+        <button className="button px-4 py-1 hidden md:block">
+          Chat With AI
+          <div className="hoverEffect">
+            <div />
+          </div>
+        </button>
+      </div>
+      <div className="block md:hidden">
+        <button className="button px-4 py-1 ">
+          Chat Now
+          <div className="hoverEffect">
+            <div />
+          </div>
+        </button>
+      </div>
     </StyledWrapper>
   );
 };
@@ -19,7 +29,6 @@ const StyledWrapper = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     border: 0;
     position: relative;
     overflow: hidden;

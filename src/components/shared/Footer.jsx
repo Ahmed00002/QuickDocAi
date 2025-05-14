@@ -2,6 +2,7 @@ import React from "react";
 import bot from "../../assets/QuickDocAiBot.png";
 import { Send } from "lucide-react";
 import { FaFacebook, FaGithub } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -60,7 +61,7 @@ const Footer = () => {
             <ul className="flex flex-col gap-2 mt-4">
               <li>About</li>
               <li>Contact</li>
-              <li>Privacy Policy</li>
+              <Link to={"/privacy-policy"}>Privacy Policy</Link>
             </ul>
           </div>
           <div className="md:col-span-4 lg:col-span-2 flex flex-col flex-wrap ">

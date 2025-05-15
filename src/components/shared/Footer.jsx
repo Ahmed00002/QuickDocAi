@@ -59,14 +59,18 @@ const Footer = () => {
           <div className="md:col-span-2">
             <h1 className="text-lg font-semibold">Company</h1>
             <ul className="flex flex-col gap-2 mt-4">
-              <li>About</li>
-              <li>Contact</li>
+              <Link to={"/about"}>About</Link>
               <Link to={"/privacy-policy"}>Privacy Policy</Link>
             </ul>
           </div>
           <div className="md:col-span-4 lg:col-span-2 flex flex-col flex-wrap ">
             <h1 className="text-lg font-semibold">Support</h1>
-            <p className="mt-4 mb-2">ahmednuman.top@gmail.com</p>
+            <a
+              href="mailto:support@quickdocai.com?subject=Support%20Request&body=Hello,%20I%20need%20help%20with..."
+              className="mt-4 mb-2"
+            >
+              ahmednuman.top@gmail.com
+            </a>
             <div className="flex gap-2 text-2xl">
               <FaFacebook className="cursor-pointer hover:text-primary-dark" />
               <FaGithub className="cursor-pointer hover:text-primary-dark" />

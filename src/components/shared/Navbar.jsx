@@ -39,12 +39,14 @@ const Navbar = () => {
           {/* sheet for mobile view */}
           <MobileSidebar />
 
-          <h1 className="text-xl md:text-3xl font-bold font-Oxanium ">
-            QuickDoc{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5A0] to-[#00D9F5]">
-              AI
-            </span>
-          </h1>
+          <NavLink to={"/"}>
+            <h1 className="text-xl md:text-3xl font-bold font-Oxanium ">
+              QuickDoc{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5A0] to-[#00D9F5]">
+                AI
+              </span>
+            </h1>
+          </NavLink>
         </div>
         {/* Navigation Menus */}
         <div className="md:flex justify-center text-gray-600 navs col-span-4 hidden ">

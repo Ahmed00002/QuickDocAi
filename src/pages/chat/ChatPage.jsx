@@ -72,6 +72,14 @@ const ChatPage = () => {
           .catch(() => {
             toast.error("QuickDoc ai not responding. Try again.");
             setLoading(false);
+            // set chat message with a failure
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: "Sorry, I couldn't process this right now.",
+              },
+            ]);
           });
       }
     } catch {
@@ -117,6 +125,14 @@ const ChatPage = () => {
           .catch(() => {
             toast.error("QuickDoc ai not responding. Try again.");
             setLoading(false);
+            // set chat message with a failure
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: "Sorry, I couldn't process this right now.",
+              },
+            ]);
           });
       } else {
         axiosSecure
@@ -134,6 +150,14 @@ const ChatPage = () => {
           .catch(() => {
             toast.error("QuickDoc ai not responding. Try again.");
             setLoading(false);
+            // set chat message with a failure
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: "Sorry, I couldn't process this right now.",
+              },
+            ]);
           });
       }
     } catch {
@@ -218,8 +242,8 @@ const ChatPage = () => {
             {/* file view for mobile */}
             {file && (
               <>
-                <div className="absolute left-0 bottom-full bg-white max-w-7/12 -translate-y-1 px-2 py-[5px] rounded-lg flax md:hidden">
-                  <div className="flex gap-2 text-ellipsis items-center">
+                <div className="absolute left-0 bottom-full bg-white md:max-w-7/12 -translate-y-1 px-2 py-[5px] rounded-lg flax md:hidden">
+                  <div className="flex gap-2 line-clamp-1 items-center">
                     <p className="flex-grow text-xs">{file?.name}</p>{" "}
                     <MdCancel onClick={cancelFile} className="cursor-pointer" />
                   </div>

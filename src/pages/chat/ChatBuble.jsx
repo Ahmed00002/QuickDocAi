@@ -1,6 +1,8 @@
-import bot from "@/assets/favicon.png";
+import bot from "@/assets/bot.png";
 import Markdown from "react-markdown";
 import { useUser } from "@clerk/clerk-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import ShinyText from "@/components/shared/ShinyText";
 
 const ChatBuble = ({ aiMsg, isAi }) => {
   const { message } = aiMsg;
@@ -9,13 +11,15 @@ const ChatBuble = ({ aiMsg, isAi }) => {
 
   return (
     <div className="flex items-start gap-2.5 mb-4 ">
-      <img
-        className={`w-8 h-8 rounded-full ${
-          isAi === "ai" ? "order-1" : "order-2"
-        }`}
-        src={isAi === "ai" ? bot : user.imageUrl}
-        alt="Profile"
-      />
+      <img />
+      <Avatar className={`${isAi === "ai" ? "order-1" : "order-2"}`}>
+        <AvatarImage
+          className={`size-8 rounded-full`}
+          src={isAi === "ai" ? bot : user.imageUrl}
+          alt="Profile"
+        />
+        <AvatarFallback>U</AvatarFallback>
+      </Avatar>
       <div
         className={`flex flex-col w-full max-w-auto leading-1.5 p-2 rounded-lg  ${
           isAi === "ai" ? "order-2" : "order-1"
@@ -33,11 +37,11 @@ const ChatBuble = ({ aiMsg, isAi }) => {
         >
           <div className="bg-gray-200 w-auto p-2 inline-block rounded-lg">
             <p
-              className={`text-sm font-normal py-2 text-gray-900 dark:text-white ${
+              className={`text-sm font-normal text-gray-900 dark:text-white ${
                 isAi === "user" && "text-right"
               }`}
             >
-              <Markdown>{message}</Markdown>
+              {message}
             </p>
           </div>
         </div>

@@ -41,7 +41,7 @@ const ChatBuble = ({ aiMsg, isAi }) => {
                 isAi === "user" && "text-right"
               }`}
             >
-              {message}
+              <Markdown>{message}</Markdown>
             </p>
           </div>
         </div>

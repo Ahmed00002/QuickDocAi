@@ -30,11 +30,11 @@ createRoot(document.getElementById("root")).render(
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
       afterSignOutUrl="/"
-      domain={"http://localhost:5173/"}
+      domain={"https://quickdocai.vercel.app"}
       signUpForceRedirectUrl="/auth/register"
     >
       {/* vercel analytics */}
-      <Analytic />
+      <Analytics />
       <BrowserRouter>
         <ToastContainer
           position="top-right"

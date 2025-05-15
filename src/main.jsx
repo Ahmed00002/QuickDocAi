@@ -6,7 +6,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 // import { HelmetProvider } from "react-helmet-async";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 import { pdfjs } from "react-pdf";
 import { Bounce, ToastContainer } from "react-toastify";
@@ -34,7 +34,7 @@ createRoot(document.getElementById("root")).render(
       signUpForceRedirectUrl="/auth/register"
     >
       {/* vercel analytics */}
-      <Analytics />
+      <Analytic />
       <BrowserRouter>
         <ToastContainer
           position="top-right"

@@ -1,4 +1,4 @@
-import bot from "@/assets/heroRobot.png";
+import bot from "@/assets/favicon.png";
 import Markdown from "react-markdown";
 import { useUser } from "@clerk/clerk-react";
 

@@ -56,20 +56,27 @@ const ChatPage = () => {
         const formData = new FormData();
         formData.append("file", file);
         // this request will perform instantly when a user upload a file.
-        axiosSecure.post("/analyze-pdf", formData).then((res) => {
-          setLoading(false);
+        axiosSecure
+          .post("/analyze-pdf", formData)
+          .then((res) => {
+            setLoading(false);
 
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              type: "ai",
-              message: res.data,
-            },
-          ]);
-        });
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: res.data,
+              },
+            ]);
+          })
+          .catch(() => {
+            toast.error("QuickDoc ai not responding. Try again.");
+            setLoading(false);
+          });
       }
     } catch {
       toast.error("Failed to ask QuickDock Ai");
+      setLoading(false);
     }
   };
 
@@ -93,32 +100,45 @@ const ChatPage = () => {
     // checking condition if user uploaded pdf file.
     try {
       if (file) {
-        axiosSecure.post(`/analyze-pdf?prompt=${prompt}`, data).then((res) => {
-          setChatMessages;
-          setLoading(false);
+        axiosSecure
+          .post(`/analyze-pdf?prompt=${prompt}`, data)
+          .then((res) => {
+            setChatMessages;
+            setLoading(false);
 
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              type: "ai",
-              message: res.data,
-            },
-          ]);
-        });
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: res.data,
+              },
+            ]);
+          })
+          .catch(() => {
+            toast.error("QuickDoc ai not responding. Try again.");
+            setLoading(false);
+          });
       } else {
-        axiosSecure.get(`/chat?prompt=${prompt}`).then((res) => {
-          setLoading(false);
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              type: "ai",
-              message: res.data,
-            },
-          ]);
-        });
+        axiosSecure
+          .get(`/chat?prompt=${prompt}`)
+          .then((res) => {
+            setLoading(false);
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                type: "ai",
+                message: res.data,
+              },
+            ]);
+          })
+          .catch(() => {
+            toast.error("QuickDoc ai not responding. Try again.");
+            setLoading(false);
+          });
       }
     } catch {
       toast.error("Failed to ask QuickDock Ai");
+      setLoading(false);
     }
   };
   return (
